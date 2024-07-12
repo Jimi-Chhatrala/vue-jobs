@@ -1,4 +1,6 @@
 <script setup>
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
 import axios from "axios";
 import router from "@/router";
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
@@ -47,7 +49,7 @@ const handleSubmit = async () => {
   };
 
   try {
-    const response = await axios.put(`/api/jobs/${jobId}`, updatedJob);
+    const response = await axios.put(`${apiBaseUrl}/jobs/${jobId}`, updatedJob);
     toast.success("Job Updated Successfully.");
     router.push(`/jobs/${response.data.id}`);
   } catch (error) {
@@ -58,7 +60,7 @@ const handleSubmit = async () => {
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`/api/jobs/${jobId}`);
+    const response = await axios.get(`${apiBaseUrl}/jobs/${jobId}`);
     state.job = response.data;
     // Populate inputs
     form.type = state.job.type;

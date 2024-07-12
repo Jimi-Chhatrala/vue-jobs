@@ -1,4 +1,6 @@
 <script setup>
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import BackButton from "@/components/BackButton.vue";
 
@@ -21,7 +23,7 @@ const deleteJob = async () => {
   try {
     const confirm = window.confirm("Are you sure to delete this job?");
     if (confirm) {
-      await axios.delete(`/api/jobs/${jobId}`);
+      await axios.delete(`${apiBaseUrl}/jobs/${jobId}`);
       toast.success("Job Deleted Successfully.");
       router.push("/jobs");
     }
@@ -33,7 +35,7 @@ const deleteJob = async () => {
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`/api/jobs/${jobId}`);
+    const response = await axios.get(`${apiBaseUrl}/jobs/${jobId}`);
     state.job = response.data;
   } catch (error) {
     console.log("Error fetching job", error);

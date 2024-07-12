@@ -1,4 +1,6 @@
 <script setup>
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
 import { RouterLink } from "vue-router";
 import { reactive, defineProps, onMounted } from "vue";
 
@@ -21,7 +23,7 @@ const state = reactive({
 
 onMounted(async () => {
   try {
-    const response = await axios.get("/api/jobs");
+    const response = await axios.get(`${apiBaseUrl}/jobs`);
     state.jobs = response.data;
   } catch (error) {
     console.log("Error fetching jobs", error);

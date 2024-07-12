@@ -1,4 +1,6 @@
 <script setup>
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
 import axios from "axios";
 import router from "@/router";
 import { useToast } from "vue-toastification";
@@ -36,7 +38,7 @@ const handleSubmit = async () => {
   };
 
   try {
-    const response = await axios.post(`/api/jobs`, newJob);
+    const response = await axios.post(`${apiBaseUrl}/jobs`, newJob);
     toast.success("Job Added Successfully.");
     router.push(`/jobs/${response.data.id}`);
   } catch (error) {
